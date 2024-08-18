@@ -1,0 +1,21 @@
+Security Risk Assessment;;;;;;;;
+Risk #;Risk ;Risk Family;Control;Liklihood;Impact;Reasoning;Mitigating Controls;Total Risk Score
+1;Weak Encryption Leading to Data Breach;Confidentiality;VPC3 File storage only supports AES-128 Encryption;Medium;High;AES-128 is weaker than AES-256, which is preferred for stronger security.;Upgrade to AES-256 encryption;8
+2;Unencrypted Databases Expose Sensitive Information;Confidentiality;Databases in production are unencrypted;High;High;Unencrypted databases pose a significant risk of data breaches.;Encrypt production databases;10
+2b;Data Integrity Compromise Through Internal Misuse;Integrity;Databases in production are unencrypted;Medium;High;Without encryption, internal users with access could misuse or alter sensitive data.;Encrypt production databases;8
+3;Weak Password Policy Increasing Risk of Unauthorized Access;Integrity;Internal network users require a 7-character password;Medium;High;7-character passwords are insufficient against modern password-cracking techniques.;Implement 8-character minimum and enforce password complexity;8
+4;Risk of Long-term Unauthorized Access Due to Non-Expiring Passwords;Integrity;Passwords never expire;Medium;High;Non-expiring passwords increase the risk of unauthorized access over time.;Implement a password expiration policy;8
+5;Lack of MFA on VPN Allows Unauthorized Remote Access;Confidentiality;VPN Access does not require MFA;High;High;Lack of MFA makes VPN access vulnerable to unauthorized users.;Implement MFA for VPN access;10
+6;Outdated Encryption Protocol Risking Data Interception;Confidentiality;TLS V1.1 is used between the cloud production environment and SwiftTech’s physical location;High;High;TLS 1.1 is outdated and may have vulnerabilities.;Upgrade to TLS 1.2 or higher;10
+7;Increased Risk of Malware Spread Due to Lack of Network Segmentation;Integrity;Application development Tiers are not logically segmented from Business Application servers;Medium;High;Lack of segmentation increases the risk of unauthorized access and malware spread.;Implement logical segmentation;8
+7b;Unauthorized Access to Business Applications;Integrity;Application development Tiers are not logically segmented from Business Application servers;Medium;High;Lack of segmentation allows developers or attackers to access business-critical applications.;Implement logical segmentation;8
+8;System Vulnerabilities Due to Unpatched Servers;Integrity;Development Tier servers are unpatched and contain multiple vulnerabilities;High;High;Unpatched systems are a common attack vector.;Regular patch management and vulnerability scanning;10
+9;Risk of Deploying Vulnerable Software Without Code Scanning;Integrity;Application code is not scanned for vulnerabilities before being published into production environment;Medium;High;Lack of code scanning increases the risk of deploying vulnerable software.;Placeholder       AssumeImplement automated code scanning none;8
+;;;;;;;;
+Notes:;;;;;;;;
+Risk - descriptions should be some reasonable approximation of what is written above but does not need to be exact;;;;;;;;
+Reasoning - The reasoning should approximately match to the user's assessment of the likelihood and impact of a potential risk.  If; for instance the likelihood and impact are marked high; the reasoning should reflect why it might be high;;;;;;
+;;;;;;;;
+Mitigating Controls - For the purpose of this exercise we did not include mitigating controls;;;;;;;;
+;;;;;;;;
+Total Risk Score - Should not be less than a reasonable approximation of the likelihood x impact.  For instance; if L=High and I=High (and no mitigating control exists) then Risk cannot equal Low;;;;;;;
